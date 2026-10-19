@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather App</title>
+  <meta name="description" content="Simple, beautiful weather app with current conditions, hourly and 7-day forecasts. Powered by Open-Meteo.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffd166' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3Cpath d='M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-theme="clear-day">
+  <div class="app">
+    <header class="header">
+      <div class="brand">
+        <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+        </svg>
+        <h1>Weather</h1>
+      </div>
+
+      <div class="controls">
+        <div class="search" id="search">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"></circle>
+            <path d="m20 20-3.5-3.5"></path>
+          </svg>
+          <input
+            id="search-input"
+            class="search-input"
+            type="search"
+            placeholder="Search city..."
+            autocomplete="off"
+            aria-label="Search for a city"
+            aria-expanded="false"
+            aria-controls="search-results"
+            role="combobox"
+          >
+          <ul id="search-results" class="search-results" role="listbox" hidden></ul>
+        </div>
+
+        <div class="unit-toggle" role="group" aria-label="Temperature unit">
+          <button id="unit-c" class="unit-btn active" type="button" aria-pressed="true">°C</button>
+          <button id="unit-f" class="unit-btn" type="button" aria-pressed="false">°F</button>
+        </div>
+
+        <button id="geo-btn" class="icon-btn" type="button" title="Use my location" aria-label="Use my location">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M12 2v3M12 19v3M2 12h3M19 12h3"></path>
+            <circle cx="12" cy="12" r="8"></circle>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="main">
+      <div id="loading" class="loading" hidden>
+        <div class="spinner" aria-hidden="true"></div>
+        <p>Fetching weather…</p>
+      </div>
+
+      <div id="error" class="error-card" hidden role="alert">
+        <p id="error-message">Something went wrong.</p>
+        <button id="retry-btn" class="btn" type="button">Try again</button>
+      </div>
+
+      <div id="weather-content" hidden>
+        <section class="card current-card" aria-label="Current weather">
+          <div class="current-main">
+            <div id="current-icon" class="current-icon" aria-hidden="true"></div>
+            <div class="current-info">
+              <h2 id="location-name">—</h2>
+              <p id="location-date" class="muted"></p>
+              <div class="temp-row">
+                <span id="current-temp" class="temp">—</span>
+              </div>
+              <p id="current-condition" class="condition">—</p>
+              <p id="current-hilo" class="hilo muted"></p>
+            </div>
+          </div>
+          <div id="details-grid" class="details-grid"></div>
+        </section>
+
+        <section class="card" aria-label="Hourly forecast">
+          <h3 class="card-title">Hourly Forecast</h3>
+          <div id="hourly-strip" class="hourly-strip"></div>
+        </section>
+
+        <section class="card" aria-label="7-day forecast">
+          <h3 class="card-title">7-Day Forecast</h3>
+          <div id="daily-list" class="daily-list"></div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p>Data by <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a></p>
+    </footer>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
